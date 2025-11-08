@@ -27,20 +27,20 @@ It cleans data, handles missing values, encodes categorical features, scales num
 ---
 
 ## 🗂️ Project Structure
-auto-prep/
-│
-├── app.py # Streamlit UI
-├── backend.py # Core preprocessing logic
-├── requirements.txt # Dependencies
-├── .gitignore # Ignored files
-├── data/ # Sample datasets
-└── README.md # Project documentation
+-auto-prep/
+-│
+-├── app.py # Streamlit UI
+-├── backend.py # Core preprocessing logic
+-├── requirements.txt # Dependencies
+-├── .gitignore # Ignored files
+-├── data/ # Sample datasets
+-└── README.md # Project documentation
 
 ## ⚙️ Setup Instructions
 
 ### 1. Clone the repository
-git clone https://github.com/<your-username>/auto-prep.git
-cd auto-prep
+-git clone <repo-link>
+-cd <project-name>
 
 2. Create a virtual environment
 python -m venv venv
