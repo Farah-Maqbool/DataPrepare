@@ -42,15 +42,15 @@ It cleans data, handles missing values, encodes categorical features, scales num
 -git clone <repo-link>
 -cd <project-name>
 
-2. Create a virtual environment
+### 2. Create a virtual environment
 python -m venv venv
 source venv/bin/activate   # On Mac/Linux
 venv\Scripts\activate      # On Windows
 
-4. Install dependencies
+### 4. Install dependencies
 pip install -r requirements.txt
 
-6. Run the app
+### 6. Run the app
 streamlit run app.py
 
 ## 📊 Example Workflow
