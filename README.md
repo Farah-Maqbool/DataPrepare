@@ -2,7 +2,7 @@
 
 DataPrepare is an AI/ML tool that automatically preprocesses raw datasets for machine learning.  
 
-It cleans data, handles missing values, encodes categorical features, scales numeric columns, and lets users download an ML-ready dataset — all in one click. The MVP uses smart automation to make preprocessing decisions based on dataset analysis, and future versions will integrate an LLM agent to suggest actions interactively.
+It cleans data, handles missing values, encodes categorical features, scales numeric columns, and lets users download an ML-ready dataset — all in one click. The MVP uses smart automation to make preprocessing decisions based on dataset analysis, and integrate an LLM agent to suggest actions interactively.
 
 ## 🚀 Features
 ✅ Upload raw CSV or Excel file   
@@ -10,7 +10,7 @@ It cleans data, handles missing values, encodes categorical features, scales num
 ✅ Handle missing values intelligently  
 ✅ Encode categorical columns  
 ✅ Scale numeric features  
-✅ Optional user overrides for preprocessing decisions  
+✅ user overrides for preprocessing decisions  
 ✅ Download cleaned dataset  
 ✅ Built with Streamlit for easy usage and deployment
 
@@ -18,9 +18,7 @@ It cleans data, handles missing values, encodes categorical features, scales num
 - **Python**
 - **Streamlit** – UI framework
 - **pandas**, **scikit-learn** – data preprocessing
-- **OpenAI / LLM API (future)** – interactive agent for smart decisions
-- **FastAPI (optional)** – backend logic for larger datasets
-- **SQLite (optional)** – for saving user project history
+- **LLM Agent** – interactive agent for smart decisions
 
 ## 🗂️ Project Structure
 DataPrepare/ <br>
@@ -57,14 +55,35 @@ pip install -r requirements.txt
 streamlit run app.py 
 
 ## 📊 Example Workflow
-Upload your raw dataset (CSV or Excel). <br>
-The app automatically analyzes the dataset. <br>
-Missing values, encoding, and scaling are handled automatically. <br> 
-Optional: override agent suggestions for each column. <br>
-Download your cleaned, ML-ready dataset. 
+User uploads CSV → Show loading spinner <br>
+Analyzer runs → Shows summary sections: <br>
+• Data shape + columns <br>
+• Missing % per column <br>
+• Unique values (top few) <br>
+• Outliers count <br>
+• Correlation summary <br>
+• Duplicate count
+📊 Display all in simple expandable sections in Streamlit <br>
+Send summary to LLM Agent → Agent analyzes and returns preprocessing plan <br>
+UI shows plan table <br>
+User clicks Confirm → Backend executes plan → Show progress + “Download Processed CSV” <br>
+
+## Limitations
+•	Input: CSV only, ~50k rows / 50 cols <br>
+•	Data types: Numeric, categorical, boolean <br>
+•	Analysis: Only statistical summaries, missing %, unique values, correlation, duplicates, outliers (simple) <br>
+•	Agent decisions: Imputation, encoding, scaling, simple outlier treatment, basic feature engineering <br>
+•	Backend: Executes only agent-approved actions <br>
+•	Visualizations: Minimal (mostly tables) <br>
+•	Exclusions for MVP: <br>
+    o	Large datasets (>50k rows) <br>
+    o	Complex feature engineering <br>
+    o	Charts, plots (optional later) <br>
+    o	NLP, images, or time series special preprocessing <br>
+    o	Multi-dataset support
+
 
 ## 🧩 Future Enhancements
-LLM agent integration for interactive preprocessing decisions <br>
 Auto EDA summary (visual insights) <br>
 Preprocessing pipeline export (sklearn compatible) <br>
 User authentication & project history <br>
