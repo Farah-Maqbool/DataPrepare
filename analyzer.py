@@ -58,3 +58,9 @@ def analyze_dataset(file_path):
     }
     
     return summary
+
+# summary = analyze_dataset("data/sample_data.csv")
+
+# for key, value in summary.items():
+#     print(f"{key}: {value}")
+#     print("\n\n")

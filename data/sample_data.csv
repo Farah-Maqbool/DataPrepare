@@ -1,0 +1,16 @@
+ID,Age,Gender,Income,City,PurchaseAmount,Married,Education
+1,25.0,Male,35000.0,New York,120,No,Bachelors
+2,28.0,Female,48000.0,Los Angeles,230,Yes,Masters
+3,35.0,Male,58000.0,Chicago,340,Yes,PhD
+4,42.0,,62000.0,New York,410,Yes,Bachelors
+5,29.0,Female,,Los Angeles,250,No,Masters
+6,31.0,Male,47000.0,San Francisco,180,No,Bachelors
+7,,Female,52000.0,New York,300,Yes,Masters
+8,36.0,Male,65000.0,Chicago,400,Yes,PhD
+9,45.0,Female,,Los Angeles,500,Yes,Masters
+10,50.0,Male,70000.0,New York,600,Yes,Bachelors
+11,25.0,Male,35000.0,New York,120,No,Bachelors
+12,25.0,Male,35000.0,New York,120,No,Bachelors
+13,25.0,Male,35000.0,New York,120,No,Bachelors
+14,25.0,Male,35000.0,New York,120,No,Bachelors
+15,25.0,Male,35000.0,New York,120,No,Bachelors
