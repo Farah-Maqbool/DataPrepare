@@ -1,4 +1,4 @@
-# 🧹 DataPrepare - AI-Powered Data Preprocessing for ML
+# 🧹 DataPrepare — Smart Data Preprocessing for Machine Learning 
 
 DataPrepare is an AI/ML tool that automatically preprocesses raw datasets for machine learning.  
 
