@@ -1,8 +1,8 @@
 import pandas as pd
 from agent import analyze_with_agent
 
-def analyze_dataset(file_path):
-    df = pd.read_csv(file_path)
+def analyze_dataset(df):
+    df = df
     
     # Basic info
     df_shape = df.shape
@@ -60,6 +60,3 @@ def analyze_dataset(file_path):
     
     return summary
 
-result = analyze_with_agent(analyze_dataset("data/sample_data.csv"))
-
-print(result)

@@ -3,18 +3,14 @@ import json
 import requests
 import pandas as pd
 from dotenv import load_dotenv
+import numpy as np
 
 load_dotenv()
-
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 MODEL_NAME = "deepseek/deepseek-chat-v3-0324"
 
-import numpy as np
-
 def convert_to_json_safe(obj):
-    """Recursively convert numpy/pandas types to JSON-serializable Python types."""
     if isinstance(obj, dict):
         return {k: convert_to_json_safe(v) for k, v in obj.items()}
     elif isinstance(obj, list):
@@ -30,11 +26,11 @@ def convert_to_json_safe(obj):
     else:
         return obj
 
-
 def analyze_with_agent(dataset_summary: dict):
     """
     Send dataset summary to LLM (DeepSeek via OpenRouter)
     to decide preprocessing actions + generate explanations.
+    Supports multiple actions per column.
     """
     if not OPENROUTER_API_KEY:
         raise ValueError("Missing OpenRouter API key. Set OPENROUTER_API_KEY in environment.")
@@ -42,26 +38,35 @@ def analyze_with_agent(dataset_summary: dict):
     prompt = f"""
 You are an intelligent AI data preprocessing agent.
 
-You are given a dataset summary in JSON. Your job is to decide preprocessing actions for each column 
-and explain your reasoning. Use only the allowed actions below:
+You are given a dataset summary in JSON. Your job is to decide preprocessing actions for each column
+and explain your reasoning. You may return multiple actions per column, in the order they should be applied.
 
+Allowed actions:
 - Missing value handling: 'drop', 'fill_median', 'fill_mean', 'fill_mode', 'fill_unknown'
 - Encoding: 'one_hot', 'label'
 - Scaling: 'standard', 'minmax'
 - Outlier handling: 'drop_outliers', 'cap_outliers'
-- Feature engineering: 'none', 'log_transform', 'interaction_term'
+- Feature engineering: 'none', 'log_transform', 'sqrt_transform', 'interaction_term'
 - Drop columns: 'drop' (only if constant or >50% missing)
 
-Return valid JSON with this structure:
+Return valid JSON like this:
+
 {{
   "columns": {{
     "ColumnName": {{
-      "action": "fill_mean",
-      "reason": "5% missing numeric values; suitable for mean imputation."
+      "actions": ["fill_mean", "standard", "cap_outliers"],
+      "reasons": [
+        "5% missing numeric values; suitable for mean imputation.",
+        "Scale after imputation for consistency.",
+        "Cap extreme values to reduce outlier effect."
+      ]
     }},
     "Category": {{
-      "action": "label",
-      "reason": "Categorical column with few unique values."
+      "actions": ["fill_unknown", "one_hot"],
+      "reasons": [
+        "Missing categorical values filled as 'Unknown'.",
+        "Convert to numerical representation."
+      ]
     }}
   }},
   "global_actions": {{
@@ -96,11 +101,9 @@ Now analyze this dataset summary and decide accordingly:
     result = response.json()
     message = result["choices"][0]["message"]["content"]
 
-    # Try parsing the JSON output safely
     try:
         decisions = json.loads(message)
     except json.JSONDecodeError:
-        # Fallback: Extract JSON-like content
         start = message.find("{")
         end = message.rfind("}") + 1
         decisions = json.loads(message[start:end])
