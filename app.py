@@ -8,8 +8,8 @@ from backend import execute_preprocessing
 # ------------------------------
 # Streamlit Page Setup
 # ------------------------------
-st.set_page_config(page_title="AI Data Preprocessing Tool", layout="wide")
-st.title("🧠 AI-Powered Data Preprocessing Tool")
+st.set_page_config(page_title="DataPrepare", layout="wide")
+st.title("🧠 DataPrepare — Smart Data Preprocessing Tool for Machine Learning")
 st.markdown(
     "Upload a CSV file, view dataset summary, get AI preprocessing suggestions, "
     "apply them, and download the processed dataset."
