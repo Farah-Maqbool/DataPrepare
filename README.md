@@ -1,4 +1,4 @@
-# 🧹 DataPrepare — Smart Data Preprocessing for Machine Learning 
+# 🧹 DataPrepare — Smart Data Preprocessing for Machine Learning
 
 DataPrepare is an AI/ML tool that automatically preprocesses raw datasets for machine learning.  
 
@@ -64,7 +64,7 @@ Analyzer runs → Shows summary sections: <br>
 • Correlation summary <br>
 • Duplicate count
 📊 Display all in simple expandable sections in Streamlit <br>
-Send summary to LLM Agent → Agent analyzes and returns preprocessing plan <br>
+Send summary to LLM  → It analyzes and returns preprocessing plan <br>
 UI shows plan table <br>
 User clicks Confirm → Backend executes plan → Show progress + “Download Processed CSV” <br>
 
