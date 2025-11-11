@@ -1,4 +1,5 @@
 import pandas as pd
+from agent import analyze_with_agent
 
 def analyze_dataset(file_path):
     df = pd.read_csv(file_path)
@@ -59,8 +60,6 @@ def analyze_dataset(file_path):
     
     return summary
 
-# summary = analyze_dataset("data/sample_data.csv")
+result = analyze_with_agent(analyze_dataset("data/sample_data.csv"))
 
-# for key, value in summary.items():
-#     print(f"{key}: {value}")
-#     print("\n\n")
+print(result)
